@@ -84,7 +84,9 @@ static int outfreq = 0;
 static pthread_mutex_t outfreq_mutex = PTHREAD_MUTEX_INITIALIZER;
 
 
+#ifdef HAVE_LIBHAMLIB
 static double get_current_seconds();
+#endif
 static void handle_trx_bandswitch(int freq);
 
 void set_outfreq(double hertz) {
@@ -123,8 +125,10 @@ void gettxinfo(void) {
 #endif
 
     static int oldbandinx;
+#ifdef HAVE_LIBXMLRPC
     static int fldigi_carrier;
     static int fldigi_shift_freq;
+#endif
 
 
     if (!trx_control)
@@ -301,11 +305,13 @@ void gettxinfo(void) {
 }
 
 
+#ifdef HAVE_LIBHAMLIB
 static double get_current_seconds() {
     struct timeval tv;
     gettimeofday(&tv, NULL);
     return tv.tv_sec + tv.tv_usec / 1e6;
 }
+#endif
 
 
 static void handle_trx_bandswitch(int freq) {
