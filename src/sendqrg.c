@@ -23,6 +23,7 @@
 #include <unistd.h>
 
 #include "bands.h"
+#include "changepars.h"
 #include "sendqrg.h"
 #include "startmsg.h"
 #include "gettxinfo.h"
@@ -222,6 +223,7 @@ int init_tlf_rig(void) {
 	    set_outfreq(SETSSBMODE);
 	    break;
 	case DIGIMODE:
+	    digi_messages();
 	    set_outfreq(SETDIGIMODE);
 	    break;
 	case CWMODE:
